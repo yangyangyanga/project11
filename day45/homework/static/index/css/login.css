@@ -1,0 +1,11 @@
+#main{
+    width: 500px;
+    margin:100px auto;
+    border:1px solid skyblue;
+    padding: 20px;
+}
+#main h1{
+    color: skyblue;
+    text-align: center;
+    margin-bottom: 50px;
+}

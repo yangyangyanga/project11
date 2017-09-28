@@ -26,14 +26,14 @@ $(document).ready(function(){
     }, false);
 
     // 写上点击黄色界面
-    var yellow = document.getElementsByClassName("yellow")
-    for(var i = 0;i < yellow.length;i++){
-        yellow[i].addEventListener("click", function () {
-            aid = yellow[i].getAttribute("h")
-            console.log(aid)
-            document.getElementById(aid).style.display = "block"
-        })
-    }
+    // var yellow = document.getElementsByClassName("yellow")
+    // for(var i = 0;i < yellow.length;i++){
+    //     yellow[i].addEventListener("click", function () {
+    //         // aid = yellow[i].getAttribute("h")
+    //         // console.log(aid)
+    //         document.getElementById(aid).style.display = "block"
+    //     })
+    // }
 
 
 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>kaige</title>
+</head>
+<body>
+    {% if flag %}
+    <h1>sunck is</h1>
+    {% else %}
+    <h1>good</h1>
+    {% end %}
+
+    <ul>
+        {% for per in pers %}
+        <li>{{per["name"]}}--{{per["age"]}}</li>
+        {% end %}
+    </ul>
+</body>
+</html>
