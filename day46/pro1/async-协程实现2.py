@@ -16,6 +16,14 @@ def longIo():
 
     threading.Thread(target=run,).start()
 
+def genCorotine(f):
+    def inner(*args, **kwargs):
+        global gen
+        gen = f()
+        next(gen)
+    return inner
+
+@genCorotine
 def reqA():
     print("开始处理请求A")
     res = yield longIo()
@@ -29,10 +37,7 @@ def reqB():
     print("结束处理请求B")
 
 def main():
-    global gen
-    gen = reqA()
-    next(gen)
-
+    reqA()
     reqB()
     while 1:
         pass

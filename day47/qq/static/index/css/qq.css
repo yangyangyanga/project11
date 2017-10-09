@@ -1,0 +1,10 @@
+#home{
+    width: 600px;
+    height: 400px;
+    margin: 150px auto;
+    border:0px solid #5cb85c;
+}
+a{
+    color: #000;
+    font-weight: bold;
+}

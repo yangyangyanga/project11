@@ -1,0 +1,29 @@
+{% extends 'qq.html' %}
+
+{% block tc %}
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="{{goodfriendurl}}">好友列表</a></li>
+        <li role="presentation"><a href="/talk">群</a></li>
+        <li role="presentation"><a href="/message">会话</a></li>
+        <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              我的 <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#">个人资料</a></li>
+                <li><a href="#">特别关心</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">退出当前账号</a></li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="list-group" style="width: 80%">
+        {% for user in users %}
+        <li class="list-group-item">
+            <!--<span class="badge">0</span>-->
+            <a href="#">{{user}}</a>
+        </li>
+        {% end %}
+    </ul>
+
+{% end %}

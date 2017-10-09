@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+</head>
+<body>
+    <div id="contents" style="height: 300px;overflow: auto">
+
+    </div>
+    <input type="text" id="message" />
+    <button onclick="sendMessage()">发送</button>
+    <script>
+        <!--连接WebSocket-->
+        var ws = new WebSocket("ws://10.0.142.250:9000/chat")
+        <!--接收数据-->
+        ws.onmessage = function (data) {
+            document.getElementById("contents").innerHTML += ("<p>" + data.data + "</p>")
+        }
+        function sendMessage(){
+            var msg = document.getElementById("message").value
+            ws.send(msg)
+            document.getElementById("message").value=""
+        }
+    </script>
+</body>
+</html>

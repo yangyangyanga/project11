@@ -1,0 +1,122 @@
+{% extends 'qq.html' %}
+
+{% block tc %}
+    <style>
+        #left{
+            width:20%;
+            height: 500px;
+            float: left;
+            background-color: #ffffff;
+        }
+        #right{
+            /*margin-top: 50px;*/
+            float: left;
+            width: 80%;
+            height:500px;
+            /*background-color: #abdeda;*/
+        }
+        .panel-body{
+            height: 460px;
+            background-color: #ffffff;
+            position: relative;
+        }
+        #inputmessage{
+            width:479px;
+            height:100px;
+            background-color: #f5f5f5;
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+        }
+        #inputmessage input{
+            width:479px;
+            height:100px;
+        }
+        #content{
+            width:460px;
+            height:335px;
+            /*background-color: silver;*/
+            overflow: auto;
+        }
+        #send{
+            width: 70px;
+            position: absolute;
+            bottom:10px;
+            right: 20px;
+        }
+    </style>
+    <ul class="nav nav-tabs">
+        <li role="presentation" ><a href="{{goodfriendurl}}">好友列表</a></li>
+        <li role="presentation"><a href="/talk">群</a></li>
+        <li role="presentation" class="active"><a href="/message">会话</a></li>
+        <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              我的<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#">个人资料</a></li>
+                <li><a href="#">特别关心</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">退出当前账号</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div id="left">
+        <ul class="list-group">
+            {% for user in users %}
+            <li class="list-group-item">
+                <!--<span class="badge">0</span>-->
+                <a href="#" class="name" ip="{{user}}">{{user}}</a>
+            </li>
+            {% end %}
+        </ul>
+    </div>
+    <div id="right">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title" id="title">好友</h3>
+            </div>
+            <div class="panel-body">
+                <div id="content">
+
+                </div>
+                <div id="inputmessage">
+                    <input type="text" id="message" name="inputmsg" value="" />
+                    <button onclick="sendMessage()" id="send">发送(S)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+//        $(document).ready(function () {
+            <!--连接WebSocket-->
+            var ws = new WebSocket("ws://10.0.142.250:8000/chat")
+            console.log("ip=", document.getElementsByClassName("name")[0].getAttribute("ip"))
+            namearr = document.getElementsByClassName("name")
+            document.getElementById("title").innerText = document.getElementsByClassName("name")[0].getAttribute("ip")
+//            for(var i = 0;i < namearr.length; i++){
+            namearr[0].onclick = function () {
+                console.log("***")
+                console.log("---",namearr[0].getAttribute("ip"))
+                document.getElementById("title").innerText = namearr[0].getAttribute("ip")
+            }
+            namearr[1].onclick = function () {
+                console.log("***")
+                console.log("---",namearr[1].getAttribute("ip"))
+                document.getElementById("title").innerText = namearr[1].getAttribute("ip")
+            }
+//            }
+
+            ws.onmessage = function (data) {
+//                console.log("===" + data.data)
+                document.getElementById("content").innerHTML += ("<p>" + data.data + "</p>")
+            }
+            function sendMessage(){
+                var msg = document.getElementById("message").value
+                ws.send(msg)
+                document.getElementById("message").value = ""
+            }
+//        })
+
+    </script>
+{% end %}

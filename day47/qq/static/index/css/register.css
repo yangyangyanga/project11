@@ -1,0 +1,15 @@
+#main{
+    width: 500px;
+    margin:200px auto;
+    border:1px solid #4cae4c;
+    padding: 20px;
+    border-radius: 20px;
+}
+#main h1{
+    color: #4cae4c;
+    text-align: center;
+    margin-bottom: 50px;
+}
+a{
+    color: #333;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+    姓名：<input id="name" type="text" name="username"/>
+    <hr/>
+    密码：<input id="passwd" type="password" name="passwd"/>
+    <hr/>
+    <button id="btn">登录</button>
+
+    <script>
+        function getCookie(name) {
+            var c = document.cookie.match("\\b" + name + "=([^;]*)\\b")
+            return c ? c[1]:undefined
+        }
+
+        document.getElementById("btn").onclick = function () {
+            name = document.getElementById("name").value
+            pswd = document.getElementById("passwd").value
+            //ajax发送post请求，表单格式数据发送
+            //"_xsrf="+getCookie("_xsrf")+"&username="+name+"&passwd="+pswd
+            $.post("/ajaxtest", "_xsrf="+getCookie("_xsrf")+"&username="+name+"&passwd="+pswd,function (data) {
+                alert("sunck is a good man")
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+
+    <link rel="stylesheet" href="{{static_url('index/css/bootstrap.min.css')}}" />
+    <script src="{{static_url('index/js/bootstrap.min.js')}}"></script>
+    <script src="{{static_url('index/js/jquery-3.1.1.min.js')}}"></script>
+
+    <style type="text/css">
+        *{
+            padding:0;
+            margin: 0;
+        }
+        body{
+            background:url("{{static_url('index/img/bimg.jpg')}}");
+        }
+    </style>
+
+</head>
+<body>
+    {% block main %}
+    {% end %}
+</body>
+</html>

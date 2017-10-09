@@ -46,9 +46,9 @@ class LogintoindexHandler(RequestHandler):
                 self.set_secure_cookie("username", username)
                 # self.set_cookie("username", username)
                 self.redirect("/")
-            else:
-                self.redirect("/login")
-
+            # else:
+            #     self.redirect("/login")
+        self.redirect("/login")
         # self.render('index/index.html', title="首页", per=pers)
 # 退出登录
 class QuitloginHandler(RequestHandler):
@@ -68,12 +68,12 @@ class RegisterSuccessHandler(RequestHandler):
         rpasswd = self.get_body_argument("passwd")
         rcheckpasswd = self.get_body_argument("checkpasswd")
         rsmallname = self.get_body_argument("smallname")
-        print(rusername)
-        print(rpasswd)
-        print(rcheckpasswd)
-        print(rsmallname)
+        # print(rusername)
+        # print(rpasswd)
+        # print(rcheckpasswd)
+        # print(rsmallname)
         userList = self.application.db.get_all_obj("select * from user", "user")
-        print(userList)
+        # print(userList)
         # rremain = ""
         registersuccess_url = self.reverse_url("registersuccess")
         ap = self.application
@@ -85,8 +85,17 @@ class RegisterSuccessHandler(RequestHandler):
                 rremain = "密码验证不对"
                 self.render('index/register.html',title="注册界面", registersuccess_url=registersuccess_url,rremain=rremain)
             else:
-                # self.application.db.insert("insert into user values(%s, %s, %s)"%(rusername, rpasswd, rsmallname))
-                ap.db.insert("insert into user values(" + rusername + rpasswd + rsmallname+")")
-                print("xiugai = ", self.application.db.get_all_obj("select * from user", "user"))
-                self.redirect('/login')
+                count = str(len(userList) + 1)
+                print("count = ", count)
+                c = self.application.db.insert("insert into user values(%s,%s, %s, %s)"%(count,rusername, rpasswd, rsmallname))
+                # c = ap.db.insert("insert into user values(" +count + rusername + rpasswd + rsmallname+")")
+                # c = ap.db.insert("insert into user values('4', 'yyx', '123', 'yyx1')")
+
+                # print("xiugai = ", self.application.db.get_all_obj("select * from user", "user"))
+                print("c = ", c)
+                # if c == 1:
+                #     self.redirect('/')
+                # else:
+                #     self.redirect('/register')
+
         # self.render('index/register.html', title="注册界面",registersuccess_url=registersuccess_url,rremain=rremain)
